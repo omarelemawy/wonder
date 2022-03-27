@@ -53,6 +53,14 @@ class SignInScreen extends StatelessWidget {
             scaffoldFormKeySingIn.currentState.showSnackBar(
                  SnackBar(content: Text( state.error,
                   style: const TextStyle(color: Colors.white),),
+                  duration: const Duration(seconds: 1),
+                  backgroundColor: Colors.blue,));
+          }
+          if (state is RegisterErrorState) {
+            scaffoldFormKeySingIn.currentState.showSnackBar(
+                SnackBar(content: Text( state.error,
+                  style: const TextStyle(color: Colors.white),),
+                  duration: const Duration(seconds: 1),
                   backgroundColor: Colors.blue,));
           }
         },
@@ -655,7 +663,7 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _showMyDialog(context) async {
+ /* Future<void> _showMyDialog(context) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -747,7 +755,7 @@ class SignInScreen extends StatelessWidget {
         );
       },
     );
-  }
+  }*/
 }
 enum SingingCharacter { user, organizer }
 SingingCharacter _character = SingingCharacter.user;

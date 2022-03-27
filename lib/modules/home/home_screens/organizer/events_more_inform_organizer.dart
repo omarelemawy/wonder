@@ -350,7 +350,7 @@ class EventMoreInformOrganizer extends StatelessWidget {
                         eventDetail.comments.length<2?eventDetail.comments.length:2:
                         eventDetail.comments.length,
                       ),
-                      GestureDetector(
+                      /*GestureDetector(
                         onTap: (){
                           HomeCubit.get(context).changeCommentState();
 
@@ -400,7 +400,7 @@ class EventMoreInformOrganizer extends StatelessWidget {
                             ],
                           ),
                         ),
-                      )
+                      )*/
                     ],
                   ),
                 ),

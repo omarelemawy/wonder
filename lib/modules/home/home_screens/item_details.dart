@@ -364,32 +364,31 @@ class ItemsDetails extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        color: Colors.grey,
+                        color: Colors.white,
                         padding: EdgeInsets.all(5),
-                        child: Card(
-                          elevation: 20,
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                child: TextFormField(
-                                  controller: commentController,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    labelText: getLang(context, "Comment"),
-                                  ),
-                                  onFieldSubmitted: (value) {
-                                    HomeCubit.get(context).sendComment(
-                                        id.toString(), value.toString()).then((
-                                        value) {
-                                      commentController.text = "";
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: commentController,
+                            decoration: InputDecoration(
+
+                              suffixIcon: IconButton(onPressed: (){
+                                if(commentController.text.toString().isNotEmpty) {
+                                  HomeCubit.get(context).sendComment(
+                                      id.toString(),
+                                      commentController.text.toString()).then((
+                                      value) {
+                                    commentController.text = "";
+                                  });
+                                }
+                              }, icon:Icon(Icons.send,color: Colors.blueAccent,),
+
+                            ),
+                              labelText: getLang(context, "Comment"),
+                              fillColor: Colors.white,
+                              border:OutlineInputBorder(borderRadius: BorderRadius.circular(30))
+                            ),
+
                           ),
                         ),
                       )

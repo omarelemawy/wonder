@@ -351,7 +351,7 @@ class AddEvents extends StatelessWidget {
                         ):
                             GestureDetector(
                               onTap: ()async{
-                                 var valueOfLocation1=await Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 var valueOfLocation1 =await Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                     const LocationForEventScreen())).then((value)async{
                                    valueOfLocation=value;
                                    List<Placemark> placemarks = await placemarkFromCoordinates(value.latitude,
@@ -362,7 +362,7 @@ class AddEvents extends StatelessWidget {
 
                                 });
 
-                                print(valueOfLocation1.toString()+"00000000");
+                                print(valueOfLocation.toString()+"00000000");
                               },
                               child: Column(
                                 children: [
@@ -604,7 +604,7 @@ class AddEvents extends StatelessWidget {
                                               getPrice.text,
                                               OrganizerCubit
                                                   .get(context)
-                                                  .indexOnlineModeAddEvent == 1
+                                                  .indexOnlineModeAddEvent == 2
                                                   ? "offline"
                                                   :
                                               "online",
@@ -612,12 +612,12 @@ class AddEvents extends StatelessWidget {
                                                   .get(context)
                                                   .indexOnlineModeAddEvent == 1
                                                   ? "0"
-                                                  : valueOfLocation.longitude,
+                                                  : valueOfLocation.longitude.toString(),
                                               OrganizerCubit
                                                   .get(context)
                                                   .indexOnlineModeAddEvent == 1
                                                   ? "0"
-                                                  : valueOfLocation.latitude,
+                                                  : valueOfLocation.latitude.toString(),
                                               OrganizerCubit
                                                   .get(context)
                                                   .indexOnlineModeAddEvent == 1

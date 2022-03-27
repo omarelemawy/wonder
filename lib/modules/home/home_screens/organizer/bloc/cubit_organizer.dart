@@ -131,7 +131,6 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
     final response = await http.post(Api,body: postBody);
     final json = jsonDecode(response.body);
     if (json["status"] == true) {
-
       print(json);
       Fluttertoast.showToast(msg: "Sponsor Deleted");
       getMySponser();
@@ -142,7 +141,6 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
       emit(RemoveSponsorErrorStates('msg'));
     }
   }
-
 
 
   void getAll() {
@@ -319,7 +317,7 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
     request.fields.addAll(postBody);
     http.StreamedResponse response = await request.send();
     response.stream.transform(utf8.decoder).listen((value) {
-      print(value);
+
       var data = jsonDecode(value);
       if (data["status"] == true) {
         print(data);
@@ -392,6 +390,7 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
       emit(GetErrorOrganizerCategoriesStates(body));
     }
   }
+
    void getCatEvent(){
      getAllCategories().then((value){
        AllCategoriesList=value;
@@ -429,6 +428,7 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
       emit(GetErrorOrganizerCountriesStates(body));
     }
   }
+
   void getAllCountriesEvent(){
     getAllCountries().then((value){
       allCountriesList=value;
@@ -446,5 +446,9 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
     allSponserListSelected.remove(index);
     emit(RemoveSponsorListSelectedAddEventState());
   }
+
+
+
+
 
 }
