@@ -33,12 +33,13 @@ dependencies:
   flutter_share: ^2.0.0
   expansion_tile_card:
   date_format:
-  splashscreen: ^1.3.5
+  flutter_native_splash: ^2.1.3+1
   intl:
   http:
   toggle_switch: ^1.4.0
   get:
   flutter_hex_color: ^2.0.0
+  arabic_numbers: ^1.0.0
   get_storage:
   pin_entry_text_field:
   pin_code_text_field:
@@ -48,6 +49,7 @@ dependencies:
   titled_navigation_bar:
   rxdart:
   path: ^1.6.4
+  splashscreen:
   file_picker: ^3.0.4
   flutter_bloc: ^7.1.0
   bloc: ^7.0.0
@@ -61,16 +63,26 @@ dependencies:
   checkbox_grouped: ^1.7.1
   url_launcher: ^6.0.20
   google_maps_flutter: ^2.1.2
+  shimmer_image: ^0.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   fluttertoast: ^8.0.7
   flutter_localizations:
     sdk: flutter
+  internet_connection_checker: ^0.0.1+3
 
+flutter_native_splash:
+  color: "#ffffff"
+  image:  assets/wegather.png
+  android: true
+  ios: true
+  web: true
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

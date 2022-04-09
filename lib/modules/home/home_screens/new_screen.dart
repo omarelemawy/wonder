@@ -28,12 +28,12 @@ class NewScreen extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.bold),),
               ),
-              body: cubit.allNewList==null?
-              const Center(child: CircularProgressIndicator()): Column(
+              body:  Column(
                 children: [
                   SizedBox(height: 4,),
                   Expanded(
-                    child: ListView.separated(
+                    child:state is GetLoadingNewDataHomeStates?
+                    const Center(child: CircularProgressIndicator()): ListView.separated(
                         itemBuilder: (context,index)=>itemBuilder(cubit.allNewList[index],context),
                         separatorBuilder: (context,index)=>
                             Container(color: Colors.grey[500] ,height: 2,),

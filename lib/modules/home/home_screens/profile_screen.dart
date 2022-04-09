@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer_image/shimmer_image.dart';
 import 'package:wander_guide/componants/app_locale.dart';
 import 'package:wander_guide/modules/home/bloc/cubit.dart';
 import 'package:wander_guide/modules/home/bloc/states.dart';
@@ -70,39 +71,13 @@ class ProfileScreen extends StatelessWidget {
                                children: [
                                  Container(
                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                   child: FadeInImage.assetNetwork(
-                                     height: 80,
-                                     width: 80,
-                                     placeholderCacheHeight: 80,
-                                     placeholderCacheWidth: 80,
-                                     fit: BoxFit.fill,
-                                     placeholder: "assets/profile.jpg",
+                                   child: ProgressiveImage(
+                                     imageError:  "assets/profile.jpg",
+                                     width: 100.0,
                                      image: cubit.profileList[0].img,
-                                     imageErrorBuilder: (context,o,c)=>
-                                         Container(
-                                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                                           decoration:  BoxDecoration(
-                                               shape: BoxShape.circle,
-                                               boxShadow: [ BoxShadow(
-                                                 color: Colors.grey.withOpacity(0.5),
-                                                 spreadRadius: 5,
-                                                 blurRadius: 7,
-                                                 offset: Offset(0, 3), // changes position of shadow
-                                               ),
-                                                 BoxShadow(
-                                                   color: Colors.grey.withOpacity(0.5),
-                                                   spreadRadius: 5,
-                                                   blurRadius: 7,
-                                                   offset: Offset(0, 3), // changes position of shadow
-                                                 ),]
-                                           ),
-                                           child: Image.asset(
-                                             "assets/profile.jpg",
-                                             height: 80,
-                                             width: 80,
-                                             fit: BoxFit.fill,
-                                           ),
-                                         ),
+                                     height: 100.0,
+                                     fit: BoxFit.fill,
+
                                    ),
                                    decoration:  BoxDecoration(
                                        shape: BoxShape.circle,

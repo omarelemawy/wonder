@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:wander_guide/modules/home/home_layout.dart';
 import 'package:wander_guide/modules/login/singin_screen.dart';
@@ -23,8 +23,9 @@ class _MyAppState extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return  SplashScreen(
-        seconds: 4,
+        seconds: 2,
         navigateAfterSeconds: nextPage(),
         title:  const Text('Wander guide',
           style:  TextStyle(

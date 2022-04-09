@@ -72,7 +72,7 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 20.0,left: 20,top: 20),
+                    padding:  const EdgeInsets.only(right: 20.0,left: 20,top: 35),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -87,7 +87,7 @@ class SignInScreen extends StatelessWidget {
                               children: [
                                 Text(lang.flag),
                                 const SizedBox(width: 8,),
-                                Text(lang.name,style: const TextStyle(fontSize: 14),)
+                                Text(lang.name,style: const TextStyle(fontSize: 14,color: Colors.black),)
                               ],
                             ),
                           )
@@ -513,7 +513,6 @@ class SignInScreen extends StatelessWidget {
                                         ),
                                         labelText: getLang(context, "Description"),
                                         labelStyle: const TextStyle(
-                                            fontWeight: FontWeight.bold,
                                             color: Colors.grey, fontSize: 18),
                                       ),
                                       controller: descriptionController,

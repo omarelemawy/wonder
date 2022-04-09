@@ -74,7 +74,7 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
         removeEvent(id);
         break;
       case 2:
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>EditEventSponsor()));
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>EditEventSponsor(id: id,)));
         break;
     }
 
@@ -86,7 +86,7 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
         removeSponsor(id);
         break;
       case 2:
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>EditEventSponsor()));
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>AddSponsorScreen(label: 2,id: id,)));
         break;
     }
 
@@ -125,9 +125,9 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
     emit(RemoveSponsorLoadingStates());
     Map<String, dynamic> postBody = {
       "token":CacheHelper.getData(key: 'remember_token'),
-      "event_id": id.toString(),
+      "sponsor_id": id.toString(),
     };
-    var Api = Uri.parse("https://wanderguide.net/api/orgEvents/sponsors/delete");
+    var Api = Uri.parse("https://wanderguide.net/api/organizer/get/sponsers/delete");
     final response = await http.post(Api,body: postBody);
     final json = jsonDecode(response.body);
     if (json["status"] == true) {
@@ -172,7 +172,6 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
 
   void addSponserCubit(context,photo,name,email,mobile) async {
     emit(AddSponsorLoadingStates());
-
     Map<String, String> postBody = {
       "token":CacheHelper.getData(key: 'remember_token'),
       "name": name,
@@ -183,9 +182,11 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
     var request =  http.MultipartRequest("POST", APIURL);
     print(photo);
     if(photo!=null) {
+      print("ppppp");
       http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
           'images[]', photo.path,filename:basename(photo.path) );
       request.files.add(multipartFile);
+      print(multipartFile.filename);
     }
     Map<String, String> mapData = {
       'token': CacheHelper.getData(key: "token"),
@@ -209,6 +210,49 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
       }
     });
   }
+
+
+
+  void editSponsorCubit(context,photo,name,email,mobile,sponsorId) async {
+    emit(AddSponsorLoadingStates());
+    print(sponsorId);
+    Map<String, String> postBody = {
+      "token":CacheHelper.getData(key: 'remember_token'),
+      "sponsor_id":sponsorId.toString(),
+      "name": name,
+      "email": email,
+      "mobile": mobile,
+    };
+    var APIURL = Uri.parse("https://wanderguide.net/api/organizer/get/sponsers/edit");
+    var request =  http.MultipartRequest("POST", APIURL);
+    print(photo);
+    if(photo!=null) {
+      print("ppppp");
+      http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
+          'images[]', photo.path,filename:basename(photo.path) );
+      request.files.add(multipartFile);
+      print(multipartFile.filename);
+    }
+    request.fields.addAll(postBody);
+
+    http.StreamedResponse response = await request.send();
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+      var data = jsonDecode(value);
+      if (data["status"] == true) {
+        print(value);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> HomeLayout()), (route) => false);
+
+        emit(AddSponsorSuccessStates());
+      }
+      else {
+        print(response.statusCode);
+        print(data["msg"]);
+        emit(AddSponsorErrorStates('msg'));
+      }
+    });
+  }
+
 
   Future<List<SponserModel>> getSponserss() async {
     emit(GetSponsersLoadingOrganizerStates());
@@ -332,6 +376,106 @@ class OrganizerCubit extends Cubit<OrganizerStates>{
       }
     });
   }
+
+
+  void editEventCubit(context,photo,title_en,title_ar,description_ar,
+      description_en,price,type,lng,lat,url,address_id,
+      category_id,List<SponserModel> sponsor,
+      List<int>datesStart,
+      List<int>datesEnd,
+      List<TextEditingController>maxCapacity,
+      List<TextEditingController>availableSeats,id)
+  async {
+    print(maxCapacity.length);
+    emit(AddEventLoadingStates());
+    List<String> sposorList=[];
+    sponsor.forEach((element) {
+      sposorList.add(element.id.toString());
+    });
+    var join = sposorList.join("|");
+
+    List<String> datesStartList=[];
+    datesStart.forEach((element) {
+      datesStartList.add(element.toString());
+    });
+    var joindatesStart = datesStartList.join("|");
+
+    List<String> datesEndList=[];
+    datesEnd.forEach((element) {
+      print(element);
+      datesEndList.add(element.toString());
+    });
+    var joindatesEnd = datesEndList.join("|");
+
+    List<String> maxCapacityList=[];
+    maxCapacity.forEach((element) {
+      print(element.text);
+      if(element.text.toString() !="") {
+        maxCapacityList.add(element.text.toString());
+      }
+    });
+    var joinMaxCapacity = maxCapacityList.join("|");
+
+    List<String> availableSeatsList=[];
+    availableSeats.forEach((element) {
+      if(element.text.toString()!="") {
+        availableSeatsList.add(element.text.toString());
+      }
+    });
+    var joinAvailableSeats = availableSeatsList.join("|");
+
+
+    Map<String, String> postBody = {
+      "token":CacheHelper.getData(key: 'remember_token'),
+      "title_en": title_en,
+      "title_ar": title_ar,
+      "event_id":id.toString(),
+      "description_ar": description_ar,
+      "description_en": description_en,
+      "price": price,
+      "type":type,
+      "lng":lng,
+      "lat":lat,
+      "url":url,
+      "address_id":address_id.toString(),
+      "category_id":category_id.toString(),
+      "sponsor[]":join,
+      "datess_start[]":joindatesStart,
+      "datess_end[]":joindatesEnd,
+      "max_capacity[]":joinMaxCapacity,
+      "available_seats[]":joinAvailableSeats,
+    };
+    var APIURL = Uri.parse("https://wanderguide.net/api/orgEvents/edit/hisEvents");
+    print(postBody);
+    var request =  http.MultipartRequest("POST", APIURL);
+    print(photo);
+    if(photo!=null) {
+      http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
+          'cover', photo.path,filename:basename(photo.path) );
+      request.files.add(multipartFile);
+    }
+    request.fields.addAll(postBody);
+    http.StreamedResponse response = await request.send();
+    response.stream.transform(utf8.decoder).listen((value) {
+
+      var data = jsonDecode(value);
+      if (data["status"] == true) {
+        print(data);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> HomeLayout()), (route) => false);
+
+        emit(AddEventSuccessStates());
+      }
+      else {
+        print(response.statusCode);
+        print(data["msg"]);
+        emit(AddEventErrorStates('msg'));
+      }
+    });
+  }
+
+
+
+
   Future logoutUser(context) async {
     emit(LogOutLoadingOrganizerStates());
     var token = CacheHelper.getData(key: 'remember_token');

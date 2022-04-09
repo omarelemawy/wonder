@@ -32,14 +32,11 @@ class ForgetPasswordScreen extends StatelessWidget {
             key: _scaffoldKey,
             appBar: AppBar(
               centerTitle:true,
-              title:   Text(getLang(context, "Forgot your password"),style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),),
+              title:   Text(getLang(context, "Forgot your password"),style: TextStyle(color: Colors.white),),
             ),
             body: SingleChildScrollView(
               child: Container(
-                margin: const EdgeInsets.only(top: 180, right: 20, left: 20),
+                margin: const EdgeInsets.only(top: 60, right: 20, left: 20),
                 child: Card(
                   shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -55,9 +52,8 @@ class ForgetPasswordScreen extends StatelessWidget {
                           Text(
                             getLang(context, "Send a confirmation message"),
                             style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                color: Colors.black,),
                           ),
                           SizedBox(height: 20,),
                           Container(
@@ -77,7 +73,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                   labelText: getLang(context, "Email"),
                                   labelStyle: const TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.normal),
                                   border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20)))
                               ),
@@ -107,8 +103,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                 getLang(context, "Submit"),
                                 style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 16,),
                               ),
                             ),
                           ),

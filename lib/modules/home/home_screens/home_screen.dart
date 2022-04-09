@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:shimmer_image/shimmer_image.dart';
 import 'package:wander_guide/componants/app_locale.dart';
 import 'package:wander_guide/model/all_events.dart';
 import 'package:wander_guide/modules/home/bloc/cubit.dart';
@@ -107,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                   cubit.allEventsList.isEmpty?const
                   Center(child:  CircularProgressIndicator()):
                   SizedBox(
-                    height: 310,
+                    height: 350,
                     child: ListView.builder(
                         /*physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,*/
@@ -131,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   cubit.allNewList.isEmpty?const
                   Center(child:  CircularProgressIndicator()): SizedBox(
-                    height: 310,
+                    height: 350,
                     child: ListView.builder(
                       /*physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,*/
@@ -152,7 +153,7 @@ Widget itemBuilder(Events allEventsList,context)
 {
   return SizedBox(
     width: 230,
-    height: 310,
+
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -168,12 +169,19 @@ Widget itemBuilder(Events allEventsList,context)
                 ClipRRect(
                   borderRadius:
                   const BorderRadius.only(topLeft: const Radius.circular(20),topRight: const Radius.circular(20)),
-                  child: Image.network(
+                  child: ProgressiveImage(
+                    imageError:  "assets/unsplash2.jpg",
+                    width: 220.0,
+                    image: 'https://wanderguide.net/assets/site/images/events/${allEventsList.details.cover}',
+                    height: 140.0,
+                    fit: BoxFit.fill,
+
+                  )/*Image.network(
                     'https://wanderguide.net/assets/site/images/events/${allEventsList.details.cover}',
                     height: 110,
                     width: 210,
                     fit: BoxFit.cover,
-                  ),
+                  ),*/
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

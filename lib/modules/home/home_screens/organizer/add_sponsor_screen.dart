@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wander_guide/componants/app_locale.dart';
 import 'package:wander_guide/modules/home/home_screens/organizer/bloc/state_organizer.dart';
 
 import 'bloc/cubit_organizer.dart';
 
 class AddSponsorScreen extends StatelessWidget {
-   AddSponsorScreen({Key key}) : super(key: key);
+   int label;
+   int id;
+   AddSponsorScreen({Key key,this.label,this.id}) : super(key: key);
   TextEditingController getName = TextEditingController();
   TextEditingController getEmail = TextEditingController();
   TextEditingController getPhone = TextEditingController();
@@ -153,11 +156,17 @@ class AddSponsorScreen extends StatelessWidget {
                     MaterialButton(
                       color: Colors.deepOrange,
                       onPressed: () {
-                        OrganizerCubit.get(context).addSponserCubit(
-                         context,_fileFirstDesign,getName.text,getEmail.text,getPhone.text
-                        );
+                        if(label==1) {
+                          OrganizerCubit.get(context).addSponserCubit(
+                              context, _fileFirstDesign, getName.text,
+                              getEmail.text, getPhone.text);
+                        }else{
+                          OrganizerCubit.get(context).editSponsorCubit(
+                              context, _fileFirstDesign, getName.text,
+                              getEmail.text, getPhone.text,id);
+                        }
                       },
-                      child: const Text("أضافة", style: const TextStyle(
+                      child:  Text(label==1?"أضافة":getLang(context, "Edit"), style: const TextStyle(
                           color: Colors.white),),
                     ),
                     const SizedBox(height: 10,)

@@ -1,0 +1,7 @@
+abstract class OrganizerStatesExtend{}
+
+class InitialOrganizerExtendStates extends OrganizerStatesExtend{}
+
+class GetLoadingOrganizerStatisticsStates extends OrganizerStatesExtend{}
+class GetSuccessOrganizerStatisticsStates extends OrganizerStatesExtend{}
+class GetErrorOrganizerStatisticsStates extends OrganizerStatesExtend{}

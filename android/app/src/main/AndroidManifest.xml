@@ -2,12 +2,19 @@
     package="com.example.wander_guide">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
    <application
         android:label="wander_guide"
         android:icon="@mipmap/ic_launcher">
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyDcD6PBqFaEHqIqiYjQHhJllZ6JGrJkEtI"/>
+       <meta-data
+           android:name="io.flutter.embedding.android.SplashScreenDrawable"
+           android:resource="@drawable/launch_background"
+           />
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

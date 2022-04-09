@@ -392,8 +392,7 @@ class AddEvents extends StatelessWidget {
                                   ,Row(
                                     children: [
                                       const SizedBox(width: 30,),
-                                      const Text("The Place you have selected is :",),
-
+                                      Text(getLang(context, "The Place you have selected is :"),),
                                     ],
                                   ),
                                   const SizedBox(height: 10,),
